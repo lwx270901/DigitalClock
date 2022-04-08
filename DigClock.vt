@@ -1,0 +1,139 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench template that is freely editable to  
+// suit user's needs .Comments are provided in each section to help the user    
+// fill out necessary details.                                                  
+// *****************************************************************************
+// Generated on "04/08/2022 20:56:00"
+                                                                                
+// Verilog Test Bench template for design : DigClock
+// 
+// Simulation tool : ModelSim-Altera (Verilog)
+// 
+
+`timescale 1 ps/ 1 ps
+module DigClock_vlg_tst();
+// constants                                           
+// general purpose registers
+reg eachvec;
+// test vector input registers
+reg AL_ON;
+reg [3:0] H_in0;
+reg [1:0] H_in1;
+reg LD_alarm;
+reg LD_time;
+reg [3:0] M_in0;
+reg [3:0] M_in1;
+reg STOP_al;
+reg clk;
+reg reset;
+// wires                                               
+wire Alarm;
+wire [3:0]  H_out0;
+wire [1:0]  H_out1;
+wire [3:0]  M_out0;
+wire [3:0]  M_out1;
+wire [3:0]  S_out0;
+wire [3:0]  S_out1;
+
+// assign statements (if any)                          
+DigClock i1 (
+// port map - connection between master ports and signals/registers   
+	.AL_ON(AL_ON),
+	.Alarm(Alarm),
+	.H_in0(H_in0),
+	.H_in1(H_in1),
+	.H_out0(H_out0),
+	.H_out1(H_out1),
+	.LD_alarm(LD_alarm),
+	.LD_time(LD_time),
+	.M_in0(M_in0),
+	.M_in1(M_in1),
+	.M_out0(M_out0),
+	.M_out1(M_out1),
+	.STOP_al(STOP_al),
+	.S_out0(S_out0),
+	.S_out1(S_out1),
+	.clk(clk),
+	.reset(reset)
+);
+initial                                                
+begin                                                  
+// code that executes only once                        
+// insert code here --> begin   
+clk = 0;
+forever #50000000 clk = ~clk;                       
+                                                       
+// --> end                                             
+$display("Running testbench");                       
+end
+initial begin
+// Initialize Inputs
+ reset = 1;
+ H_in1 = 1;
+ H_in0 = 0;
+ M_in1 = 1;
+ M_in0 = 9;
+ LD_time = 0;
+ LD_alarm = 0;
+ STOP_al = 0;
+ AL_ON = 0;
+
+ #1000000000;
+ reset = 0;
+ H_in1 = 1;
+ H_in0 = 0;
+ M_in1 = 2;
+ M_in0 = 0;
+ LD_time = 0;
+ LD_alarm = 1;
+ STOP_al = 0;
+ AL_ON = 1; 
+ 
+
+#1000000000;
+ reset = 0;
+ H_in1 = 1;
+ H_in0 = 0;
+ M_in1 = 2;
+ M_in0 = 0;
+ LD_time = 0;
+ LD_alarm = 0;
+ STOP_al = 0;
+ AL_ON = 1;
+
+wait(Alarm);
+#1000000000;
+#1000000000;
+#1000000000;
+#1000000000;
+#1000000000;
+#1000000000;
+STOP_al = 1;
+
+ end                                                    
+always                                                 
+// optional sensitivity list                           
+// @(event1 or event2 or .... eventn)                  
+begin                                                  
+// code executes for every event on sensitivity list   
+// insert code here --> begin                          
+                                                       
+@eachvec;                                              
+// --> end                                             
+end                                                    
+endmodule
+
